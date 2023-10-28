@@ -1,31 +1,31 @@
 package com.github.yoruhinda.timer.ui;
 
-import com.github.yoruhinda.timer.manager.TimerManager;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 
-public class TimerFrame extends JFrame {
-    private TimerPanel timerPanel = new TimerPanel();
-    private TimerManager timerManager = new TimerManager(timerPanel);
+public class CountdownFrame extends JFrame {
+    private CountdownPanel countdownPanel = new CountdownPanel();
 
-    public TimerFrame() {
-    }
-
-    public void initializeFrame() {
+    public void initializeFrame(){
+        countdownPanel.initComponents();
+        setTitle("Timer");
+        setContentPane(countdownPanel);
         try {
             setIconImage(ImageIO.read(new File("src/resources/timerIcon.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        setTitle("Timer");
         setResizable(false);
-        add(timerPanel);
-        pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public CountdownPanel getTimerCountPanel() {
+        return countdownPanel;
     }
 }
