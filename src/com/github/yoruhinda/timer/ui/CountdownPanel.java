@@ -5,10 +5,10 @@ import com.github.yoruhinda.timer.listeners.CloseKeyListener;
 import javax.swing.*;
 import java.awt.*;
 
-public class CountdownPanel extends JPanel{
+public class CountdownPanel extends JPanel {
     private JLabel timer = new JLabel();
 
-    public void initComponents(){
+    public void initComponents() {
         setBackground(Color.BLACK);
         setLayout(new BorderLayout());
         addKeyListener(new CloseKeyListener());
@@ -16,9 +16,15 @@ public class CountdownPanel extends JPanel{
 
         timer.setForeground(Color.WHITE);
         timer.setHorizontalAlignment(JLabel.CENTER);
-        timer.setFont(new Font("arial",Font.PLAIN ,350));
+        adaptiveFontSize();
 
         add(timer, BorderLayout.CENTER);
+    }
+
+    private void adaptiveFontSize() {
+        int width = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+        int height = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+        timer.setFont(new Font(timer.getFont().getName(), timer.getFont().getStyle(), (width + height) / 10));
     }
 
     public JLabel getTimer() {
